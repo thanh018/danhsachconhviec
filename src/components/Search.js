@@ -13,7 +13,7 @@ class Search extends Component {
                 </button>
                 </span>
             </div>
-        </div>  
+        </div>
     );
   }
 }

@@ -3,6 +3,10 @@ import TaskItem from './TaskItem';
 
 class TaskList extends Component {
   render() {
+    var { tasks } = this.props;
+    var eleTasks = tasks.map((task, index) => {
+        return <TaskItem key={task.id} index ={index} task={task}/>
+    });
     return (
         <table className="table table-bordered table-hover">
             <thead>
@@ -28,9 +32,7 @@ class TaskList extends Component {
                     </td>
                     <td></td>
                 </tr>
-                <TaskItem />
-                <TaskItem />
-                <TaskItem />
+                {eleTasks}
             </tbody>
         </table>
     );

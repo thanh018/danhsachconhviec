@@ -5,12 +5,12 @@ class Sort extends Component {
     return (
         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div className="dropdown">
-                <button 
-                className="btn btn-primary dropdown-toggle" 
-                type="button" 
-                id="dropdownMenu1" 
-                data-toggle="dropdown" 
-                aria-haspopup="true" 
+                <button
+                className="btn btn-primary dropdown-toggle"
+                type="button"
+                id="dropdownMenu1"
+                data-toggle="dropdown"
+                aria-haspopup="true"
                 aria-expanded="true"
                 >
                     Sắp Xếp <span className="fa fa-caret-square-o-down ml-5"></span>
