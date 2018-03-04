@@ -4,8 +4,41 @@ class TaskForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             name: '',
             status: false,
+        }
+    }
+
+    componentWillMount() {
+        // console.log('will mount');
+        if(this.props.task) {
+            this.setState({
+                id: this.props.task.id,
+                name: this.props.task.name,
+                status: this.props.task.status
+            });
+            //console.log(this.state);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        // console.log('nextProps ' + nextProps);
+        if(nextProps && nextProps.task) {
+            this.setState({
+                id: nextProps.task.id,
+                name: nextProps.task.name,
+                status: nextProps.task.status
+            });
+            //console.log(this.state);
+        }
+        else if(nextProps && nextProps.task === null) {//  !nextProps.task
+            // console.log('sua -> them');
+            this.setState({
+                id: '',
+                name: '',
+                status: false,
+            });
         }
     }
 
@@ -29,12 +62,23 @@ class TaskForm extends Component {
         event.preventDefault();
         //console.log(this.state);
         this.props.onSubmit(this.state);
+        this.onClear();
+        this.onCloseForm();
     }
+
+    onClear = () => {
+        this.setState({
+            name: '',
+            status: false
+        });
+    } 
   render() {
+    var {id} = this.state;
     return (
         <div className="panel panel-warning">
             <div className="panel-heading">
-                <h3 className="panel-title">Thêm Công Việc
+                <h3 className="panel-title">
+                    { id !== '' ? 'Cập nhật công việc' : 'Thêm công việc'}
                     <span
                         className="fa fa-times-circle text-right"
                         onClick = { this.onCloseForm }
@@ -71,7 +115,7 @@ class TaskForm extends Component {
                             Lưu Lại
                         </button>&nbsp;
                         <button
-                            type="submit"
+                            type="button"
                             className="btn btn-danger"
                             onClick={this.onClear}
                         >

@@ -4,9 +4,9 @@ Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## set up
-npm init
-npm install --save react react-dom
-npm start
+  - npm init
+  - npm install --save react react-dom
+  - npm start
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
