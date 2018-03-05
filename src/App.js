@@ -15,7 +15,9 @@ class App extends Component {
                 name: '',
                 status: -1
             },
-            keyword: ''
+            keyword: '',
+            sortBy: 'name',
+            sortValue: 1
         }
     }
     componentWillMount() {
@@ -176,8 +178,17 @@ class App extends Component {
         });
     }
 
+    onSort = (sortBy, sortValue) => {
+        // console.log(sortBy, sortValue);
+        this.setState({
+            sortBy: sortBy,
+            sortValue: sortValue
+        })
+        //console.log(this.state);
+    }
+
     render() {
-        var { tasks, isDisplayForm, taskEditing, filter, keyword } = this.state; //var tasks = this.state.tasks
+        var { tasks, isDisplayForm, taskEditing, filter, keyword, sortBy, sortValue } = this.state; //var tasks = this.state.tasks
         //console.log(filter);
         if(filter) {
             if(filter.name) {
@@ -194,6 +205,7 @@ class App extends Component {
                 }
             });
         }
+        console.log(sortBy, sortValue);
         if(keyword) {
             tasks = tasks.filter((task) => {
                 return task.name.toLowerCase().indexOf(keyword) !== -1;
@@ -235,6 +247,10 @@ class App extends Component {
                         </button>
                         <Control
                             onSearch = {this.onSearch}
+                            onSort ={this.onSort}
+                            sortBy ={sortBy}
+                            sortValue ={sortValue}
+
                         />
                         <div className="row mt-15">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
