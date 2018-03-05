@@ -14,7 +14,8 @@ class App extends Component {
             filter : {
                 name: '',
                 status: -1
-            }
+            },
+            keyword: ''
         }
     }
     componentWillMount() {
@@ -96,7 +97,7 @@ class App extends Component {
             var index = this.findIndex(data.id);
             tasks[index] = data;
         }
-        
+
         this.setState({
             tasks : tasks,
             taskEditing: null
@@ -108,8 +109,8 @@ class App extends Component {
         //console.log(id);
         var {tasks} = this.state;
         var index = this.findIndex(id);
-        console.log(index);
-        
+        //console.log(index);
+
         if(index !== -1) {
             tasks[index].status = !tasks[index].status;
             this.setState({
@@ -161,16 +162,43 @@ class App extends Component {
         filterStatus = parseInt(filterStatus, 10);
         this.setState({
             filter : {
-                name: filterName,
+                name: filterName.toLowerCase(),
                 status: filterStatus
             }
         });
 
     }
 
+    onSearch = (keyword) => {
+        //console.log(keyword);
+        this.setState({
+            keyword: keyword
+        });
+    }
+
     render() {
-        var {tasks, isDisplayForm, taskEditing, filter} = this.state; //var tasks = this.state.tasks
-        console.log(filter);
+        var { tasks, isDisplayForm, taskEditing, filter, keyword } = this.state; //var tasks = this.state.tasks
+        //console.log(filter);
+        if(filter) {
+            if(filter.name) {
+                tasks = tasks.filter((task) => {
+                    return task.name.toLowerCase().indexOf(filter.name) !== -1;
+                });
+            }
+            tasks = tasks.filter((task) => {
+                if(filter.status === -1) {
+                    return task;
+                }
+                else {
+                    return task.status === (filter.status === 1 ? true : false)
+                }
+            });
+        }
+        if(keyword) {
+            tasks = tasks.filter((task) => {
+                return task.name.toLowerCase().indexOf(keyword) !== -1;
+            });
+        }
         var eleTaskForm = isDisplayForm ?
             <TaskForm
                 onCloseForm = {this.onCloseForm}
@@ -205,10 +233,12 @@ class App extends Component {
                             >
                             Gernerate Data
                         </button>
-                        <Control></Control>
+                        <Control
+                            onSearch = {this.onSearch}
+                        />
                         <div className="row mt-15">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <TaskList 
+                                <TaskList
                                     tasks={tasks}
                                     onUpdateStatus = {this.onUpdateStatus}
                                     onDelete = {this.onDelete}

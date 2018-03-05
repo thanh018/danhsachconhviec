@@ -71,7 +71,7 @@ class TaskForm extends Component {
             name: '',
             status: false
         });
-    } 
+    }
   render() {
     var {id} = this.state;
     return (

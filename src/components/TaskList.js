@@ -26,7 +26,7 @@ class TaskList extends Component {
     var { tasks } = this.props;
     var { filterName, filterStatus } = this.props;
     var eleTasks = tasks.map((task, index) => {
-        return <TaskItem 
+        return <TaskItem
                     key={task.id}
                     index ={index}
                     task={task}
@@ -49,16 +49,16 @@ class TaskList extends Component {
                 <tr>
                     <td></td>
                     <td>
-                        <input 
-                            type="text" 
-                            className="form-control" 
+                        <input
+                            type="text"
+                            className="form-control"
                             name="filterName"
                             value={ filterName }
                             onChange = { this.onChange }
                         />
                     </td>
                     <td>
-                        <select 
+                        <select
                             className="form-control"
                             name='filterStatus'
                             value={filterStatus}
