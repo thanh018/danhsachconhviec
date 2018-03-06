@@ -211,6 +211,22 @@ class App extends Component {
                 return task.name.toLowerCase().indexOf(keyword) !== -1;
             });
         }
+
+        if(sortBy === 'name') {
+            tasks.sort((a, b) => {
+                if(a.name > b.name) return sortValue;
+                else if(a.name < b.name) return -sortValue;
+                else return 0;
+            });
+        }
+        else {
+            tasks.sort((a, b) => {
+                if(a.status > b.status) return -sortValue;
+                else if(a.status < b.status) return sortValue;
+                else return 0;
+            });
+        }
+
         var eleTaskForm = isDisplayForm ?
             <TaskForm
                 onCloseForm = {this.onCloseForm}
