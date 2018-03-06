@@ -3,6 +3,7 @@ import './App.css';
 import TaskForm from './components/TaskForm';
 import Control from './components/Control';
 import TaskList from './components/TaskList';
+import demo from './tranning/demo';
 
 class App extends Component {
     constructor(props) {
