@@ -206,7 +206,7 @@ class App extends Component {
                 }
             });
         }
-        console.log(sortBy, sortValue);
+        //console.log(sortBy, sortValue);
         if(keyword) {
             tasks = tasks.filter((task) => {
                 return task.name.toLowerCase().indexOf(keyword) !== -1;
